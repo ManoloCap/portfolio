@@ -61,7 +61,19 @@ export default buildConfig({
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      //connectionString: process.env.POSTGRES_URI,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      host: process.env.POSTGRES_HOST,
+      port: parseInt(process.env.POSTGRES_PORT || "", 10) || 5432,
+      database: process.env.POSTGRES_DB,
+      ssl: process.env.DATABASE_SSL !== 'false' ?
+        process.env.CA_CERT ? {
+          rejectUnauthorized: true,
+          ca: process.env.CA_CERT,
+        } : {
+          rejectUnauthorized: false,
+        } : false,
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
