@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    jobs: Job;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -87,6 +88,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    jobs: JobsSelect<false> | JobsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -190,7 +192,57 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        textPosition?: ('Left' | 'Right') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contentWithMedia';
+      }
+    | {
+        title: string;
+        job: (number | Job)[];
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'jobCarousel';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -212,6 +264,30 @@ export interface Page {
  */
 export interface Post {
   id: number;
+  blockTest?:
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        textPosition?: ('Left' | 'Right') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contentWithMedia';
+      }[]
+    | null;
   title: string;
   heroImage?: (number | null) | Media;
   content: {
@@ -727,6 +803,20 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs".
+ */
+export interface Job {
+  id: number;
+  title?: string | null;
+  company?: string | null;
+  start_time?: string | null;
+  end_time?: string | null;
+  exclude_seat?: ('Python' | 'Javascript' | 'Docker')[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -918,6 +1008,10 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'jobs';
+        value: number | Job;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1015,6 +1109,24 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        contentWithMedia?:
+          | T
+          | {
+              content?: T;
+              image?: T;
+              textPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        jobCarousel?:
+          | T
+          | {
+              title?: T;
+              job?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1119,6 +1231,19 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  blockTest?:
+    | T
+    | {
+        contentWithMedia?:
+          | T
+          | {
+              content?: T;
+              image?: T;
+              textPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   title?: T;
   heroImage?: T;
   content?: T;
@@ -1273,6 +1398,19 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs_select".
+ */
+export interface JobsSelect<T extends boolean = true> {
+  title?: T;
+  company?: T;
+  start_time?: T;
+  end_time?: T;
+  exclude_seat?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

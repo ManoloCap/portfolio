@@ -18,6 +18,8 @@ import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
+import { ContentWithMedia } from '../../blocks/ContentWithMedia'
+
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -69,6 +71,13 @@ export const Posts: CollectionConfig<'posts'> = {
     useAsTitle: 'title',
   },
   fields: [
+    {
+      type: 'blocks',
+      name: 'blockTest',
+      blocks: [
+          ContentWithMedia
+      ]
+    },
     {
       name: 'title',
       type: 'text',

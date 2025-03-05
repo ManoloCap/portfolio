@@ -13,6 +13,8 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
+// import { TypingAnimation } from '../../../components/TypingAnimation'
+
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const pages = await payload.find({
@@ -75,6 +77,20 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
+
+      {/* <TypingAnimation
+              key={key}
+              message={message}
+              typingSpeed={200} // 0.2 seconds per character
+              mistakeProbability={0.2}
+              onComplete={() => {
+                console.log("Animation complete!")
+                setAnimationComplete(true)
+                // Reset the indicator after 2 seconds
+                setTimeout(() => setAnimationComplete(false), 2000)
+              }}
+            /> */}
+
     </article>
   )
 }
