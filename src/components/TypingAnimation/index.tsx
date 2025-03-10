@@ -31,7 +31,7 @@ export default function TypingAnimation({
     let currentDisplayedText = "";
     
     const typeCharacter = () => {
-      if (currentIndex < message.length) {
+      if (message && currentIndex < message.length) {
         const charToType = message.charAt(currentIndex);
 
         // Determine if this character should be a mistake

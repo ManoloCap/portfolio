@@ -12,6 +12,8 @@ import {
   CarouselPrevious,
   CarouselApi
 } from "@/components/ui/carousel";
+import { Media } from '@/payload-types';
+
 import { Badge } from "@/components/ui/badge";
 
 type Props = {
@@ -26,7 +28,7 @@ export type JobCarouselType = {
   title: string;
 };
 
-const empty_job = {
+const empty_job: Job = {
   id: -1,
   title: "",
   company: "",
@@ -36,7 +38,15 @@ const empty_job = {
   images: [],
   updatedAt: "",
   createdAt: "",
+  description: ""
+};
+
+
+function isMediaType(image: number | Media): image is Media {
+  return typeof image === 'object' && image !== null && 'url' in image;
 }
+
+
 export const JobCarousel: React.FC<Props> = (props) => {
   const { content, job, title } = props;
   const [ activeJob, setActiveJob ] = useState<Job>(empty_job);
@@ -123,7 +133,7 @@ const handleJobCardSelectionOpened = () => {
                               </pre> */}
                             </div>
                             <p className="italic text-sm mt-1 text-gray-300">
-                              {`${formatDate(jobItem?.start_time)} - ${formatDate(jobItem?.end_time)}`}
+                              {`${formatDate(jobItem?.start_time ?? '')} - ${formatDate(jobItem?.end_time ?? '')}`}
                             </p>
                           </div>
                           <div className="bg-gray-900 p-4">
@@ -194,7 +204,10 @@ const handleJobCardSelectionOpened = () => {
               <CarouselContent className="items-center">
                 {activeJob?.images?.map((imageData, index) => {
                   const host = "http://localhost:3000";
-                  const fullImageUrl = `${host}${imageData?.image?.url}`;
+                  //const fullImageUrl = `${host}${imageData?.image?.url}`;
+                  const fullImageUrl = (imageData?.image && isMediaType(imageData.image))
+                  ? `${host}${imageData.image.url}`
+                  : `${host}/default-image.jpg`; // Provide a fallback URL
 
                   return (
                     <CarouselItem key={index} className="flex justify-center">
