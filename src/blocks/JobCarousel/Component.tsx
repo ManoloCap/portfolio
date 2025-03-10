@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useRef, useEffect} from 'react';
-import { Media } from '@/payload-types';
 import { Job } from '@/payload-types';
 import { getProgrammingLanguageColor } from '@/utilities/techStackColorConfig';
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
@@ -26,19 +25,6 @@ export type JobCarouselType = {
   job: Job[];
   title: string;
 };
-
-interface Job {
-  id: number;
-  title: string;
-  company: string;
-  start_time: string;
-  end_time: string;
-  tech_stack: string[];
-  images: string[];
-  updatedAt: string;
-  createdAt: string;
-  description?: string; 
-}
 
 const empty_job = {
   id: -1,
