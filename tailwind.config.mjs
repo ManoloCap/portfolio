@@ -49,6 +49,7 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        fadeInOut: 'fadeInOut 20s ease-in-out infinite',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -105,6 +106,13 @@ const config = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
+        },
+        fadeInOut: {
+          '0%': { opacity: '0' },
+          '8%': { opacity: '0.75' }, // 2 seconds fade in (2/24 = 8.33%)
+          '30%': { opacity: '0.75' }, // Stay at opacity 1 for 5 seconds (2+5 = 7, 7/24 = 29.17%)
+          '38%': { opacity: '0' },  // 2 seconds fade out (7+2 = 9, 9/24 = 37.5%)
+          '100%': { opacity: '0' },   // Stay at opacity 0 for 15 seconds
         },
       },
       typography: () => ({
