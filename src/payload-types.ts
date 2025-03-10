@@ -242,6 +242,12 @@ export interface Page {
         blockName?: string | null;
         blockType: 'jobCarousel';
       }
+    | {
+        cb_comp: 'manolocap_type_header_projects' | 'manolocap_type_header_home';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'customBlockComponent';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -811,7 +817,14 @@ export interface Job {
   company?: string | null;
   start_time?: string | null;
   end_time?: string | null;
-  exclude_seat?: ('Python' | 'Javascript' | 'Docker')[] | null;
+  description: string;
+  tech_stack?: ('Python' | 'Javascript' | 'Docker')[] | null;
+  images?:
+    | {
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1127,6 +1140,13 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        customBlockComponent?:
+          | T
+          | {
+              cb_comp?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1408,7 +1428,14 @@ export interface JobsSelect<T extends boolean = true> {
   company?: T;
   start_time?: T;
   end_time?: T;
-  exclude_seat?: T;
+  description?: T;
+  tech_stack?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

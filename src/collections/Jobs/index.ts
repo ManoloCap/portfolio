@@ -3,6 +3,9 @@ import { tech_stack } from '@/utilities/webConstants'
 
 export const Jobs: CollectionConfig = {
   slug: 'jobs',
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
   },
@@ -40,11 +43,29 @@ export const Jobs: CollectionConfig = {
       },
     },
     {
-      name: "exclude_seat",
-      label: "Exclude Seats",
+      name: "description",
+      label: "Description",
+      type: 'textarea',
+      required: true
+    },
+    {
+      name: "tech_stack",
+      label: "Job Tech Stack",
       type: "select",
       hasMany: true,
       options: tech_stack
+    },
+    {
+      name: "images",
+      type: "array",
+      fields: [
+        {
+          name: 'image',
+          label: "Image",
+          type: 'upload',
+          relationTo:'media'
+      },
+      ]
     }
   ],
   timestamps: true,

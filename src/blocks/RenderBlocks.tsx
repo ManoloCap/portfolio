@@ -9,6 +9,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/Component'
 import { JobCarousel } from '@/blocks/JobCarousel/Component'
+import { customBlockComponent } from '@/blocks/customBlockComponent/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -17,7 +18,8 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   contentWithMedia: ContentWithMedia,
-  jobCarousel: JobCarousel
+  jobCarousel: JobCarousel,
+  customBlockComponent: customBlockComponent
 }
 
 export const RenderBlocks: React.FC<{
@@ -27,6 +29,7 @@ export const RenderBlocks: React.FC<{
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
+  console.log("RENDER BLOCK PRINT ---------- ")
   if (hasBlocks) {
     return (
       <Fragment>
@@ -38,7 +41,7 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div className="my-16" key={index}>
+                <div className="" key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>

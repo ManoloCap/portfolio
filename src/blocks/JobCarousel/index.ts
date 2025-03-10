@@ -20,6 +20,7 @@ export const JobCarousel: Block = {
             relationTo: 'jobs',
             hasMany: true,
             required: true,
+            maxDepth: 10
         },
         {
             type: 'richText',

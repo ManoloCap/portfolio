@@ -16,13 +16,13 @@ import { draftMode } from 'next/headers'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-// import { geologica } from '../fonts' 
+import { geologica } from '../fonts' 
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(GeistSans.variable, GeistMono.variable, geologica.className)} lang="en" suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

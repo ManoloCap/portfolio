@@ -2,28 +2,37 @@ import clsx from 'clsx'
 import React from 'react'
 
 interface Props {
+  model?: string | undefined
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
 }
 
 export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
+  const { loading: loadingFromProps, priority: priorityFromProps, className, model } = props
 
   const loading = loadingFromProps || 'lazy'
   const priority = priorityFromProps || 'low'
 
+  // Change Logo by Model
+  let img_src = "./images/logo_manolocapdev_inverted_horizontal.png"
+  let logo_className = clsx('max-w-[6.375rem] w-full', className)
+  if(model == 'footer'){
+    img_src = "./images/cat-logo.png"
+    logo_className = clsx('max-w-[10.375rem]', className)
+  }
+
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Payload Logo"
-      width={193}
-      height={34}
+      alt="Manolocap.dev Logo"
+      width={200}
+      height={200}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      className={logo_className}
+      src={img_src}
     />
   )
 }

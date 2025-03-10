@@ -11,7 +11,7 @@ import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { ContentWithMedia } from '../../blocks/ContentWithMedia'
 import { JobCarousel } from '@/blocks/JobCarousel'
-
+import { customBlockComponent } from '@/blocks/customBlockComponent/config'
 
 // Imports
 import { hero } from '@/heros/config'
@@ -42,6 +42,7 @@ export const Pages: CollectionConfig<'pages'> = {
   defaultPopulate: {
     title: true,
     slug: true,
+    layout: true
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -82,7 +83,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, ContentWithMedia, JobCarousel],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, ContentWithMedia, JobCarousel, customBlockComponent],
               required: true,
               admin: {
                 initCollapsed: true,
