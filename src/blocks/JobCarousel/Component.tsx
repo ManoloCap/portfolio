@@ -15,7 +15,7 @@ import {
 import { Media } from '@/payload-types';
 
 import { Badge } from "@/components/ui/badge";
-import Image from 'next/image'; 
+import Image from 'next/image';
 
 type Props = {
   id?: string;
@@ -51,10 +51,10 @@ function isMediaType(image: number | Media): image is Media {
 export const JobCarousel: React.FC<Props> = (props) => {
   const { content, job, title } = props;
   const [ activeJob, setActiveJob ] = useState<Job>(empty_job);
-  
+
   const [carouselImagesApi, setCarouselImagesApi] = React.useState<CarouselApi>()
   const [imageLoaded, setImageLoaded] = React.useState(false);
-  
+
   const [carouselJobsApi, setCarouselJobsApi] = React.useState<CarouselApi>()
   const [carouselJobsSecondaryApi, setCarouselJobsSecondaryApi] = React.useState<CarouselApi>()
 
@@ -68,12 +68,12 @@ export const JobCarousel: React.FC<Props> = (props) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  
+
   const handleJobCardSelection = (e: React.MouseEvent<HTMLDivElement>, jobItem: Job, index: number) => {
 
     // First, set the active job to the selected job item
     setActiveJob(jobItem);
-  
+
     // Check if the carousel image API is available
     if (carouselImagesApi) {
       // Scroll to the beginning of the carousel
@@ -81,10 +81,10 @@ export const JobCarousel: React.FC<Props> = (props) => {
     } else {
       console.warn("carouselImagesApi is not set");
     }
-  
+
     console.log("CLICKED: ", jobItem);
     console.log("Scrolling to index: ", index);
-  
+
     // Check if the carousel jobs secondary API is available
     if (carouselJobsSecondaryApi) {
       // Scroll to the specific job index in the secondary carousel
@@ -101,25 +101,27 @@ const handleJobCardSelectionOpened = () => {
 };
 
   return (
-    <div className="gap-8 flex flex-col items-center justify-center sm:px-20 xl:flex-grow xl:min-h-[60vh] xl:relative xl:top-[0vh] pb-5">
+    <div className="gap-9 flex flex-col items-center justify-center xl:flex-grow xl:min-h-[60vh] xl:relative xl:top-[0vh] pb-5 px-12">
 
-      {activeJob?.id == -1 && ( 
-        <div className="flex flex-col items-center justify-center">
+      {activeJob?.id == -1 && (
+        <div className="flex flex-col items-center justify-center px-12">
           <h1 className="text-2xl bold font-semibold  text-white mt-8 mb-4 decoration-wavy">
             Select one to get more details
           </h1>
-      
+
           <Carousel
             opts={{
               align: "start",
             }}
-            className="px-14"
+            className=""
             setApi={setCarouselJobsApi}
           >
+            <CarouselPrevious />
             <CarouselContent>
+            
               {job.map((jobItem, index) => (
                 <CarouselItem key={jobItem.id} className="sm:basis-1/1 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4" onClick={ (e) => {handleJobCardSelection(e,jobItem, index)}}>
-                  <div className="p-1">
+                  <div className="p-2">
 
                   <Card className="transition ease-in-out duration-300 hover:bg-purple-300 active:bg-yellow-300 hover:cursor-pointer" >
                     <CardContent className="flex aspect-square items-center justify-center p-6">
@@ -161,13 +163,13 @@ const handleJobCardSelectionOpened = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
+            
             <CarouselNext />
           </Carousel>
         </div>
       )}
 
-      {activeJob?.id != -1 && ( 
+      {activeJob?.id != -1 && (
 
 
         <Card
@@ -181,7 +183,7 @@ const handleJobCardSelectionOpened = () => {
 
       )}
 
-      {activeJob?.id != -1 && ( 
+      {activeJob?.id != -1 && (
         <div className="flex flex-col md:flex-row r px-14 gap-x-8">
           <div className="flex flex-col items-center md:w-1/2 gap-y-4 p-4">
             <h1 className="text-3xl text-center font-bold text-white decoration-wavy pt-4">
