@@ -15,7 +15,7 @@ import {
 import { Media } from '@/payload-types';
 
 import { Badge } from "@/components/ui/badge";
-import Image from 'next/image';
+import Image from 'next/image'; 
 
 type Props = {
   id?: string;
@@ -51,10 +51,10 @@ function isMediaType(image: number | Media): image is Media {
 export const JobCarousel: React.FC<Props> = (props) => {
   const { content, job, title } = props;
   const [ activeJob, setActiveJob ] = useState<Job>(empty_job);
-
+  
   const [carouselImagesApi, setCarouselImagesApi] = React.useState<CarouselApi>()
   const [imageLoaded, setImageLoaded] = React.useState(false);
-
+  
   const [carouselJobsApi, setCarouselJobsApi] = React.useState<CarouselApi>()
   const [carouselJobsSecondaryApi, setCarouselJobsSecondaryApi] = React.useState<CarouselApi>()
 
@@ -68,12 +68,12 @@ export const JobCarousel: React.FC<Props> = (props) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-
+  
   const handleJobCardSelection = (e: React.MouseEvent<HTMLDivElement>, jobItem: Job, index: number) => {
 
     // First, set the active job to the selected job item
     setActiveJob(jobItem);
-
+  
     // Check if the carousel image API is available
     if (carouselImagesApi) {
       // Scroll to the beginning of the carousel
@@ -81,10 +81,10 @@ export const JobCarousel: React.FC<Props> = (props) => {
     } else {
       console.warn("carouselImagesApi is not set");
     }
-
+  
     console.log("CLICKED: ", jobItem);
     console.log("Scrolling to index: ", index);
-
+  
     // Check if the carousel jobs secondary API is available
     if (carouselJobsSecondaryApi) {
       // Scroll to the specific job index in the secondary carousel
@@ -101,75 +101,89 @@ const handleJobCardSelectionOpened = () => {
 };
 
   return (
-    <div className="gap-9 flex flex-col items-center justify-center xl:flex-grow xl:min-h-[60vh] xl:relative xl:top-[0vh] pb-5 px-12">
+    <div className="gap-8 flex flex-col items-center justify-center flex-grow pb-5 ">
 
-      {activeJob?.id == -1 && (
-        <div className="flex flex-col items-center justify-center px-12">
+      {activeJob?.id == -1 && ( 
+        <div className="flex flex-col items-center justify-center w-full h-full">
           <h1 className="text-2xl bold font-semibold  text-white mt-8 mb-4 decoration-wavy">
             Select one to get more details
           </h1>
+      
+          <div className="m-5 sm:m-16 relative">
+          <Image
+            src="/images/slide_real_hand.gif"
+            alt="Overlay Image"
+            layout="intrinsic"
+            width={550}
+            height={550}
+            className="absolute z-10 pointer-events-none animate-fadeInOut"
+            style={{
+                top: 'auto',
+                right: '0px',
+                bottom: '0px',
+                left: 'auto',
+              }}
+            />
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className=""
+              setApi={setCarouselJobsApi}
+            >
+              <CarouselContent>
+                {job.map((jobItem, index) => (
+                  <CarouselItem key={jobItem.id} className="sm:basis-1/1 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 " onClick={ (e) => {handleJobCardSelection(e,jobItem, index)}}>
 
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            className=""
-            setApi={setCarouselJobsApi}
-          >
-            <CarouselPrevious />
-            <CarouselContent>
-            
-              {job.map((jobItem, index) => (
-                <CarouselItem key={jobItem.id} className="sm:basis-1/1 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4" onClick={ (e) => {handleJobCardSelection(e,jobItem, index)}}>
-                  <div className="p-2">
-
-                  <Card className="transition ease-in-out duration-300 hover:bg-purple-300 active:bg-yellow-300 hover:cursor-pointer" >
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <div className="container p-0 w-full h-full bg-black">
-                        <div className="grid grid-cols-1 gap-0 w-full h-full bg-purple-500 rounded">
-                          <div className="p-4">
-                            <div className="flex justify-between w-full">
-                              <h2 className="font-bold text-xl">{jobItem?.company}</h2>
-                              <h2 className="font-bold text-xl">{jobItem?.title}</h2>
-                              {/* <pre className="text-white text-sm overflow-auto">
-                                {JSON.stringify(jobItem, null, 2)}
-                              </pre> */}
+                    <Card className="transition ease-in-out duration-300 hover:bg-purple-300 active:bg-yellow-300 hover:cursor-pointer" >
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <div className="container p-0 w-full h-full bg-black">
+                          <div className="grid grid-cols-1 gap-0 w-full h-full bg-purple-500 rounded">
+                            <div className="p-4">
+                              <div className="flex justify-between w-full">
+                                <h2 className="font-bold text-xl">{jobItem?.company}</h2>
+                                <h2 className="font-bold text-xl">{jobItem?.title}</h2>
+                              </div>
+                              <p className="italic text-sm mt-1 text-gray-300">
+                                {`${formatDate(jobItem?.start_time ?? '')} - ${formatDate(jobItem?.end_time ?? '')}`}
+                              </p>
                             </div>
-                            <p className="italic text-sm mt-1 text-gray-300">
-                              {`${formatDate(jobItem?.start_time ?? '')} - ${formatDate(jobItem?.end_time ?? '')}`}
-                            </p>
-                          </div>
-                          <div className="bg-gray-900 p-4">
-                            <h2 className="text-center mb-4">Tech Stack</h2>
-                              {Array.isArray(jobItem?.tech_stack) && (
-                                <div className="flex flex-wrap gap-2">
-                                  {jobItem.tech_stack.map((tech, index) => (
-                                    <Badge
-                                      key={index}
-                                      className={`m-1 ${getProgrammingLanguageColor(tech)}`}
-                                    >
-                                      {tech}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              )}
+                            <div className="bg-gray-900 p-4">
+                              <h2 className="text-center mb-4">Tech Stack</h2>
+                                {Array.isArray(jobItem?.tech_stack) && (
+                                  <div className="flex flex-wrap gap-2">
+                                    {jobItem.tech_stack.map((tech, index) => (
+                                      <Badge
+                                        key={index}
+                                        className={`m-1 ${getProgrammingLanguageColor(tech)}`}
+                                      >
+                                        {tech}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
 
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            <CarouselNext />
-          </Carousel>
+              <div className="hidden md:block">
+                <CarouselPrevious />
+              </div>
+              <div className="hidden md:block">
+                <CarouselNext />
+              </div>
+
+            </Carousel>
+          </div>
         </div>
       )}
 
-      {activeJob?.id != -1 && (
+      {activeJob?.id != -1 && ( 
 
 
         <Card
@@ -183,7 +197,7 @@ const handleJobCardSelectionOpened = () => {
 
       )}
 
-      {activeJob?.id != -1 && (
+      {activeJob?.id != -1 && ( 
         <div className="flex flex-col md:flex-row r px-14 gap-x-8">
           <div className="flex flex-col items-center md:w-1/2 gap-y-4 p-4">
             <h1 className="text-3xl text-center font-bold text-white decoration-wavy pt-4">
