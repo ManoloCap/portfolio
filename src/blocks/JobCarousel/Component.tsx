@@ -15,6 +15,7 @@ import {
 import { Media } from '@/payload-types';
 
 import { Badge } from "@/components/ui/badge";
+import Image from 'next/image'; 
 
 type Props = {
   id?: string;
@@ -203,22 +204,22 @@ const handleJobCardSelectionOpened = () => {
             >
               <CarouselContent className="items-center">
                 {activeJob?.images?.map((imageData, index) => {
-                  const host = "http://localhost:3000";
-                  //const fullImageUrl = `${host}${imageData?.image?.url}`;
-                  const fullImageUrl = (imageData?.image && isMediaType(imageData.image))
-                  ? `${host}${imageData.image.url}`
-                  : `${host}/default-image.jpg`; // Provide a fallback URL
-
+                  // Update the fullImageUrl to point to the relative path
+                  const fullImageUrl = imageData?.image && isMediaType(imageData.image)
+                    ? `${imageData.image.url}` // Assuming images are in 'public/images'
+                    : '/default-image.jpg'; // Provide a fallback URL within 'public'
+                  console.log("IMAGE URL; ", fullImageUrl)
                   return (
                     <CarouselItem key={index} className="flex justify-center">
                       <Card className="">
                         <CardContent className="p-5 bg-gray-900">
-                          {!imageLoaded && <p> Loading... </p>}
-                          <img
+                          <Image
                             src={fullImageUrl}
                             alt={`Job Image ${index + 1}`}
-                            className={`w-auto h-auto max-h-full max-w-full object-cover rounded-lg ${imageLoaded ? 'block' : 'hidden'}`}
-                            onLoad={() => setImageLoaded(true)}
+                            layout="intrinsic"
+                            width={500}  // Set appropriate width
+                            height={300} // Set appropriate height
+                            className="object-cover rounded-lg"
                           />
                         </CardContent>
                       </Card>
