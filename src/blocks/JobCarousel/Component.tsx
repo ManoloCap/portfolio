@@ -104,7 +104,7 @@ const handleJobCardSelectionOpened = () => {
     <div className="gap-8 flex flex-col items-center justify-center flex-grow ">
 
       {activeJob?.id == -1 && ( 
-        <div className="flex flex-col items-center justify-center w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full h-full mb-10">
           <h1 className="text-2xl bold font-semibold  text-white mt-8  decoration-wavy">
             Professional Experience
           </h1>
@@ -198,7 +198,7 @@ const handleJobCardSelectionOpened = () => {
       )}
 
       {activeJob?.id != -1 && ( 
-        <div className="flex flex-col md:flex-row r px-14 gap-x-8 items-center m-5">
+        <div className="flex flex-col md:flex-row r px-14 gap-x-8 items-center mb-10">
           <div className="flex flex-col items-center md:w-1/2 gap-y-8 md:gap-y-16 p-4">
             <h1 className="text-3xl text-center font-bold dark:text-white decoration-wavy">
               {activeJob?.title}
