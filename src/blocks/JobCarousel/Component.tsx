@@ -101,15 +101,15 @@ const handleJobCardSelectionOpened = () => {
 };
 
   return (
-    <div className="gap-8 flex flex-col items-center justify-center flex-grow pb-5 ">
+    <div className="gap-8 flex flex-col items-center justify-center flex-grow ">
 
       {activeJob?.id == -1 && ( 
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <h1 className="text-2xl bold font-semibold  text-white mt-8 mb-4 decoration-wavy">
-            Select one to get more details
+          <h1 className="text-2xl bold font-semibold  text-white mt-8  decoration-wavy">
+            Professional Experience
           </h1>
       
-          <div className="m-5 sm:m-16 relative">
+          <div className="mx-16 mt-4 relative">
           <Image
             src="/images/slide_real_hand.gif"
             alt="Overlay Image"
@@ -198,19 +198,19 @@ const handleJobCardSelectionOpened = () => {
       )}
 
       {activeJob?.id != -1 && ( 
-        <div className="flex flex-col md:flex-row r px-14 gap-x-8">
-          <div className="flex flex-col items-center md:w-1/2 gap-y-4 p-4">
-            <h1 className="text-3xl text-center font-bold text-white decoration-wavy pt-4">
+        <div className="flex flex-col md:flex-row r px-14 gap-x-8 items-center m-5">
+          <div className="flex flex-col items-center md:w-1/2 gap-y-8 md:gap-y-16 p-4">
+            <h1 className="text-3xl text-center font-bold dark:text-white decoration-wavy">
               {activeJob?.title}
             </h1>
-            <div className="flex-1 flex items-center justify-center px-4 md:px-0">
-              <p className="text-white text-justify">
+            <div className="flex-1 flex items-center justify-center ">
+              <p className="dark:text-white text-justify md:text-xl 2xl:text-2xl">
                 {activeJob?.description}
               </p>
             </div>
           </div>
 
-          <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center p-4">
+          <div className="md:mt-0 md:w-1/2 flex justify-center">
             <Carousel
               opts={{
                 align: "start",
@@ -233,8 +233,8 @@ const handleJobCardSelectionOpened = () => {
                             src={fullImageUrl}
                             alt={`Job Image ${index + 1}`}
                             layout="intrinsic"
-                            width={500}  // Set appropriate width
-                            height={300} // Set appropriate height
+                            width={1024}
+                            height={1024}
                             className="object-cover rounded-lg"
                           />
                         </CardContent>

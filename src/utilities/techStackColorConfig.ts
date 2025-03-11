@@ -38,7 +38,7 @@ export function getProgrammingLanguageColor(language: string): string | undefine
     ['Angular', 'bg-gradient-to-r from-red-600 via-red-700 to-red-600'], // Angular Red
     ['OpenAI', 'bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700'], // OpenAI Gray
     ['LLMs', 'bg-gradient-to-r from-purple-500 via-purple-600 to-purple-500'], // LLMs Purple
-    ['Druid', 'bg-gradient-to-r from-blue-700 via-black to-blue-700'], // Druid Blue
+    ['Druid', 'bg-gradient-to-r from-green-500 via-green-600 to-green-500'], // Druid Green
     ['SQL', 'bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500'], // SQL Blue
     ['CSS', 'bg-gradient-to-r from-blue-500 via-indigo-600 to-blue-500'], // CSS Blue
     ['Tailwind', 'bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400'], // Tailwind Blue
