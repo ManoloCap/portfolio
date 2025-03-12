@@ -20,6 +20,10 @@ export const customBlockComponent: Block = {
                 {
                     label: 'Manolocap Type Header Home',
                     value: 'manolocap_type_header_home',
+                },
+                {
+                    label: 'Manolocap Home Middle Component',
+                    value: 'manolocap_middle_home_component',
                 }
             ]
         }

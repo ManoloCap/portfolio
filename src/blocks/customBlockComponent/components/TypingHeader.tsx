@@ -16,6 +16,7 @@ export const TypingHeaderProjects: React.FC = () => {
 
 export const TypingHeaderHome: React.FC = () => {
   const messages = [
+    "Welcome to Manolocap.dev",
     "I am, Manolo Capilla.",
     "Software Developer.",
     "Mechatronic Engineer."

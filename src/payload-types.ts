@@ -243,7 +243,7 @@ export interface Page {
         blockType: 'jobCarousel';
       }
     | {
-        cb_comp: 'manolocap_type_header_projects' | 'manolocap_type_header_home';
+        cb_comp: 'manolocap_type_header_projects' | 'manolocap_type_header_home' | 'manolocap_middle_home_component';
         id?: string | null;
         blockName?: string | null;
         blockType: 'customBlockComponent';
