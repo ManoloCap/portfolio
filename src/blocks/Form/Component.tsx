@@ -114,50 +114,62 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="container lg:max-w-[48rem]">
-      {enableIntro && introContent && !hasSubmitted && (
-        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
-      )}
-      <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
-        <FormProvider {...formMethods}>
-          {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <RichText data={confirmationMessage} />
-          )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-          {!hasSubmitted && (
-            <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4 last:mb-0">
-                {formFromProps &&
-                  formFromProps.fields &&
-                  formFromProps.fields?.map((field, index) => {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
-                    if (Field) {
-                      return (
-                        <div className="mb-6 last:mb-0" key={index}>
-                          <Field
-                            form={formFromProps}
-                            {...field}
-                            {...formMethods}
-                            control={control}
-                            errors={errors}
-                            register={register}
-                          />
-                        </div>
-                      )
-                    }
-                    return null
-                  })}
+    <div className="container lg:max-w-[48rem] my-8">
+        {enableIntro && introContent && !hasSubmitted && (
+          <RichText className="mb-8 lg:mb-12 text-gray-800" data={introContent} enableGutter={false} />
+        )}
+        <div className="p-6 bg-white dark:bg-black shadow-md border-2 border-gray-700 dark:border-pink-200/60 rounded-lg">
+          {/* New title paragraph added */}
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">Contact Me</h2>
+          <FormProvider {...formMethods}>
+            {!isLoading && hasSubmitted && confirmationType === 'message' && (
+              <div className="mb-6">
+                <RichText data={confirmationMessage} className="text-green-600 font-medium" />
               </div>
-
-              <Button form={formID} type="submit" variant="default">
-                {submitButtonLabel}
-              </Button>
-            </form>
-          )}
-        </FormProvider>
-      </div>
+            )}
+            {isLoading && !hasSubmitted && (
+              <p className="text-center text-gray-800">Loading, please wait...</p>
+            )}
+            {error && (
+              <div className="mb-4 text-red-600 text-lg text-center">
+                {`${error.status || '500'}: ${error.message || ''}`}
+              </div>
+            )}
+            {!hasSubmitted && (
+              <form id={formID} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="mb-4 ">
+                  {formFromProps &&
+                    formFromProps.fields &&
+                    formFromProps.fields.map((field, index) => {
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields];
+                      if (Field) {
+                        return (
+                          <div key={index} className="mb-6 last:mb-0 ">
+                            <div className="mb-6 last:mb-0">
+                              <Field
+                                form={formFromProps}
+                                {...field}
+                                {...formMethods}
+                                control={control}
+                                errors={errors}
+                                register={register}
+                              />
+                            </div>
+                          </div>
+                        );
+                      }
+                      return null;
+                    })
+                  }
+                </div>
+                <Button form={formID} type="submit"  className="w-full py-3 font-semibold rounded-lg shadow-md transition duration-200 bg-black bg-pink-200/60 hover:bg-pink-500/60 hover:shadow-lg">
+                  {submitButtonLabel}
+                </Button>
+              </form>
+            )}
+          </FormProvider>
+        </div>
     </div>
   )
 }
