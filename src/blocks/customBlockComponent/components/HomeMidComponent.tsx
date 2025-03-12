@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface HomeMidComponentProps {
+  
+}
 export const HomeMidComponent: React.FC<HomeMidComponentProps> = () => {
     const [isBlogImageHovered, setIsBlogImageHovered] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
