@@ -62,7 +62,7 @@ export const HomeMidComponent: React.FC<HomeMidComponentProps> = () => {
   
   {/* Second Image Section */}
   <div className="flex-1 flex items-center justify-center border-b md:border-b-0 relative">
-    <a href="/projects" className="relative w-full h-full flex justify-center items-center rounded-2xl cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}> 
+    <a href="/projects" className="relative w-full h-full flex justify-center items-center rounded-2xl bg-white cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}> 
       {/* Clickable area */}
       <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
         <div className="relative w-full h-full">
