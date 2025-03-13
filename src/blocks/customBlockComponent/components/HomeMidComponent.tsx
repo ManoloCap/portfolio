@@ -10,15 +10,15 @@ export const HomeMidComponent: React.FC<HomeMidComponentProps> = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-<div className="flex flex-col md:flex-row h-[50vh] my-10">
+<div className="flex flex-col md:flex-row h-[50vh] my-10 px-8">
   {/* First Image Section */}
   <div className="flex-1 flex items-center justify-center border-b md:border-b-0 relative">
-                <Link href="/blog" className="relative w-full h-full flex justify-center items-center rounded-2xl bg-blue-950 cursor-pointer"
+    <Link href="/blog" className="relative w-full h-full flex justify-center items-center rounded-2xl bg-gray-800 cursor-pointer"
       onMouseEnter={() => setIsBlogImageHovered(true)}
       onMouseLeave={() => setIsBlogImageHovered(false)}
-    >
+      >
       {/* Clickable area */}
-      <div className={`absolute inset-0 transition-opacity duration-500 ${isBlogImageHovered ? 'opacity-80' : 'opacity-100'}`}>
+      <div className={`absolute inset-0 transition-opacity duration-500 ${isBlogImageHovered ? 'opacity-10' : 'opacity-100'}`}>
         <div className="relative w-full h-full">
           <Image
             src="/images/profile_image.png" // Make sure this path is correct
@@ -33,24 +33,25 @@ export const HomeMidComponent: React.FC<HomeMidComponentProps> = () => {
 
       {/* Mobile First*/}
       <div className={`flex absolute inset-0 items-center justify-center transition-opacity duration-500 md:hidden`}>
-        <h2 className="text-black text-2xl font-bold">
-          <span>{`Blog`}</span>
+        <h2 className="text-black text-2xl sm:text-4xl font-bold">
+          <span>{`Blog 🚧`}</span>
         </h2>
       </div>
 
-      <div className={`flex absolute inset-0 items-center justify-center transition-opacity duration-500 ${isBlogImageHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <h2 className="text-black text-2xl font-bold">
-          <span>{`Blog`}</span>
+      <div className={`hidden md:flex  absolute inset-0 items-center justify-center transition-opacity duration-500 ${isBlogImageHovered ? 'opacity-100' : 'opacity-0'}`}>
+        <h2 className="text-black text-2xl md:text-4xl font-bold">
+          <span>{`Blog 🚧`}</span>
         </h2>
       </div>
-                </Link>
+    </Link>
   </div>
 
   {/* Second Image Section */}
   <div className="flex-1 flex items-center justify-center border-b md:border-b-0 relative">
-                <Link href="/projects" className="relative w-full h-full flex justify-center items-center rounded-2xl bg-white cursor-pointer"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}>
+    <Link href="/projects" className="relative w-full h-full flex justify-center items-center rounded-2xl bg-white cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
       {/* Clickable area */}
       <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
         <div className="relative w-full h-full">
@@ -79,17 +80,17 @@ export const HomeMidComponent: React.FC<HomeMidComponentProps> = () => {
 
       {/* Mobile First*/}
       <div className={`flex absolute inset-0 items-center justify-center transition-opacity duration-500  md:hidden`}>
-        <h2 className="text-black text-2xl font-bold">
+        <h2 className="text-black text-2xl sm:text-4xl font-bold">
           <span>{`Projects`}</span>
         </h2>
       </div>
 
                     <div className={`flex absolute inset-0 items-center justify-center transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <h2 className="text-black text-2xl font-bold">
+        <h2 className="text-black text-2xl sm:text-4xl font-bold">
           <span>{`Projects`}</span>
         </h2>
       </div>
-                </Link>
+    </Link>
   </div>
 </div>
     );

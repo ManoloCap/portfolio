@@ -58,6 +58,8 @@ export const JobCarousel: React.FC<Props> = (props) => {
   const [carouselJobsApi, setCarouselJobsApi] = React.useState<CarouselApi>()
   const [carouselJobsSecondaryApi, setCarouselJobsSecondaryApi] = React.useState<CarouselApi>()
 
+  const logo_image = "https://cdn.theorg.com/52358455-c542-4ec0-b515-413eb97942fb_medium.jpg"
+
   if (!job || job.length === 0) {
     return null;
   }
@@ -132,43 +134,66 @@ const handleJobCardSelectionOpened = () => {
               setApi={setCarouselJobsApi}
             >
               <CarouselContent>
-                {job.map((jobItem, index) => (
-                  <CarouselItem key={jobItem.id} className="sm:basis-1/1 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 " onClick={ (e) => {handleJobCardSelection(e,jobItem, index)}}>
+                {job.map((jobItem, index) =>  {
+                  // Update the fullImageUrl to point to the relative path
+                  const carousel_card_Logo_image = jobItem?.logo_image && isMediaType(jobItem.logo_image)
+                  ? `${jobItem.logo_image.url}` // Assuming images are in 'public/images'
+                  : '/default-image.jpg'; // Provide a fallback URL within 'public'            
+                  return (
+                    <CarouselItem key={jobItem.id} className="sm:basis-1/1 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 " onClick={ (e) => {handleJobCardSelection(e,jobItem, index)}}>
 
-                    <Card className="transition ease-in-out duration-300 hover:bg-purple-300 active:bg-yellow-300 hover:cursor-pointer" >
-                      <CardContent className="flex aspect-square items-center justify-center p-6">
-                        <div className="container p-0 w-full h-full bg-black">
-                          <div className="grid grid-cols-1 gap-0 w-full h-full bg-purple-500 rounded">
-                            <div className="p-4">
-                              <div className="flex justify-between w-full">
-                                <h2 className="font-bold text-xl">{jobItem?.company}</h2>
-                                <h2 className="font-bold text-xl">{jobItem?.title}</h2>
+                      <Card className="transition ease-in-out duration-300 hover:bg-purple-300 active:bg-yellow-300 hover:cursor-pointer" >
+                        <CardContent className="flex aspect-square items-center justify-center p-6">
+                          <div className="container p-0 w-full h-full bg-black rounded">
+                            <div className="grid grid-cols-1 gap-0 w-full h-full bg-purple-500 rounded">
+                              
+                              <div className="flex flex-co justify-between">
+                                <div className="p-4">
+                                  <h1 className="font-bold text-xl text-green-300 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] ">{jobItem?.company}</h1>
+                                  <h2  className="font-bold text-xl text-black">{jobItem?.title}</h2>
+                                  <p className="italic text-sm mt-1 text-gray-300 ">
+                                    {`${formatDate(jobItem?.start_time ?? '')} - ${formatDate(jobItem?.end_time ?? '')}`}
+                                  </p> 
+                                </div>
+                                <div className="p-2 rounded-xl">
+                                  <Image
+                                      src={carousel_card_Logo_image}
+                                      alt={`Company Logo`}
+                                      layout="intrinsic"
+                                      width={89}
+                                      height={89}
+                                      className="object-cover rounded-lg"
+                                    />
+                                </div>
+
                               </div>
-                              <p className="italic text-sm mt-1 text-gray-300">
-                                {`${formatDate(jobItem?.start_time ?? '')} - ${formatDate(jobItem?.end_time ?? '')}`}
-                              </p>
-                            </div>
-                            <div className="bg-gray-900 p-4">
-                              <h2 className="text-center mb-4">Tech Stack</h2>
-                                {Array.isArray(jobItem?.tech_stack) && (
-                                  <div className="flex flex-wrap gap-2">
-                                    {jobItem.tech_stack.map((tech, index) => (
-                                      <Badge
-                                        key={index}
-                                        className={`m-1 ${getProgrammingLanguageColor(tech)}`}
-                                      >
-                                        {tech}
-                                      </Badge>
-                                    ))}
-                                  </div>
-                                )}
+
+
+
+
+                              <div className="bg-gray-900 p-4">
+                                <h2 className="text-center mb-4">Tech Stack</h2>
+                                  {Array.isArray(jobItem?.tech_stack) && (
+                                    <div className="flex flex-wrap gap-2">
+                                      {jobItem.tech_stack.map((tech, index) => (
+                                        <Badge
+                                          key={index}
+                                          className={`m-1 ${getProgrammingLanguageColor(tech)}`}
+                                        >
+                                          {tech}
+                                        </Badge>
+                                      ))}
+                                    </div>
+                                  )}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  )
+                })}
+
               </CarouselContent>
 
               <div className="hidden md:block">

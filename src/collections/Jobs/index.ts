@@ -66,7 +66,13 @@ export const Jobs: CollectionConfig = {
           relationTo:'media'
       },
       ]
-    }
+    },
+    {
+      name: 'logo_image',
+      label: "Logo Image",
+      type: 'upload',
+      relationTo:'media'
+    },
   ],
   timestamps: true,
 }

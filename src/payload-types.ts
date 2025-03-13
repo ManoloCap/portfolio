@@ -919,6 +919,7 @@ export interface Job {
         id?: string | null;
       }[]
     | null;
+  logo_image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1530,6 +1531,7 @@ export interface JobsSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  logo_image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
