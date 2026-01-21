@@ -114,10 +114,9 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ assets, fallbackImage }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const imageTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const imageTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // If no assets, show fallback
@@ -192,20 +191,16 @@ const Carousel: React.FC<CarouselProps> = ({ assets, fallbackImage }) => {
       clearTimeout(imageTimeoutRef.current);
     }
 
-    setIsLoading(true);
-
     if (currentAsset.type === 'image') {
       // Images stay for 4 seconds
       const img = new Image();
       img.src = currentAsset.src;
       img.onload = () => {
-        setIsLoading(false);
         imageTimeoutRef.current = setTimeout(() => {
           goToNext();
         }, 4000);
       };
       img.onerror = () => {
-        setIsLoading(false);
         // If image fails, move to next after a short delay
         imageTimeoutRef.current = setTimeout(() => {
           goToNext();
@@ -216,7 +211,6 @@ const Carousel: React.FC<CarouselProps> = ({ assets, fallbackImage }) => {
       const video = videoRef.current;
       if (video) {
         const handleCanPlay = () => {
-          setIsLoading(false);
           video.play().catch(() => {
             // If autoplay fails, move to next after a delay
             setTimeout(() => {
@@ -230,7 +224,6 @@ const Carousel: React.FC<CarouselProps> = ({ assets, fallbackImage }) => {
         };
 
         const handleError = () => {
-          setIsLoading(false);
           // If video fails, move to next
           setTimeout(() => {
             goToNext();
@@ -302,7 +295,6 @@ const Carousel: React.FC<CarouselProps> = ({ assets, fallbackImage }) => {
                   onError={(e) => {
                     // Fallback to default image if asset fails to load
                     (e.target as HTMLImageElement).src = fallbackImage;
-                    setIsLoading(false);
                   }}
                 />
               ) : (
