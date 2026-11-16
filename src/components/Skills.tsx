@@ -17,10 +17,10 @@ const skillCategories: SkillCategory[] = [
     skills: ["Python (Expert)", "JavaScript/TypeScript", "SQL", "Java", "C++", "Go"]
   },
   {
-    title: "AI & Systems",
-    detail: "Intelligent automation",
+    title: "AI & Agents",
+    detail: "Production LLM systems",
     icon: <Cpu size={24} />,
-    skills: ["AI Agents", "RAG Pipelines", "Computer Vision", "TensorFlow", "MediaPipe"]
+    skills: ["AI Agents", "LLM Orchestration", "LangGraph", "Claude Agent SDK", "MCP", "RAG Pipelines", "Computer Vision", "TensorFlow", "MediaPipe"]
   },
   {
     title: "Data Engineering",
@@ -36,9 +36,9 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "Cloud & DevOps",
-    detail: "Scalable infrastructure",
+    detail: "Infrastructure as code",
     icon: <Globe size={24} />,
-    skills: ["Docker", "Kubernetes", "GCP", "AWS", "Jenkins", "GitHub Actions", "CI/CD"]
+    skills: ["Terraform", "Docker", "Kubernetes", "GCP", "AWS", "Linux", "Jenkins", "GitHub Actions", "CI/CD"]
   }
 ];
 
@@ -54,7 +54,7 @@ export const Skills: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         >
           <h2 className="section-title">Software <span className="text-secondary">Arsenal</span></h2>
-          <p className="section-subtitle">Deep expertise in modern full-stack engineering and intelligent systems.</p>
+          <p className="section-subtitle">Deep expertise in AI platform engineering, backend systems, and the infrastructure that runs them.</p>
         </motion.div>
 
         <div className="skills-grid">

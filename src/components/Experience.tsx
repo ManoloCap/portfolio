@@ -18,15 +18,15 @@ const jobs: Job[] = [
     company: "Samsung Electronics",
     period: "Jan 2025 – Present",
     description: "I provide freelance engineering services for Samsung's high-visibility promotional events, focusing on the end-to-end development of interactive game systems. My role is to deliver the backend logic and real-time synchronization required to keep live experiences stable for large audience groups. As part of these services, I have designed and deployed several custom software solutions, including a series of themed Slot Machine games and a fully interactive Roulette system tailored specifically for live engagement. A key deliverable was the architecture of a WebSocket-based remote control framework, which allows event attendees to use their own mobile phone sensors (e.g., shake detection) to manipulate on-screen game elements. Additionally, I developed an AI-driven fitness experience that uses computer vision (TensorFlow and MediaPipe) to track barbell movements and squats, translating physical kinetics into a spaceship game interface.",
-    tech: ["Python", "WebSockets", "TensorFlow", "MediaPipe", "Computer Vision", "Real-Time Systems", "Node.js"]
+    tech: ["Python", "LangGraph", "Claude Agent SDK", "MCP", "Terraform", "WebSockets", "TensorFlow", "MediaPipe", "Computer Vision", "Real-Time Systems", "Node.js"]
   },
   {
     id: 2,
     title: "Founder — AI Consultant & Engineer",
     company: "Agente.tech",
     period: "Nov 2024 – Present",
-    description: "On Agente.tech, I design and deploy custom AI agents tailored to specific business objectives. My work focuses on the orchestration of LLM workflows, building RAG (Retrieval-Augmented Generation) pipelines, and automating data-driven decision-making processes. I am responsible for the entire lifecycle of these solutions—from designing data ingestion pipelines that transform raw client data into actionable insights to building the backend APIs that serve these AI models. This role bridges the gap between cutting-edge AI research and practical business automation, providing continuous optimization and integration support for diverse client systems. Also I deliver day to day Web Solutions as applications with requirements on demand.",
-    tech: ["AI Agents", "RAG Pipelines", "LLM Orchestration", "FastAPI", "Python", "Data Engineering"]
+    description: "On Agente.tech, I design and deploy custom AI agents tailored to specific business objectives. My work focuses on LLM workflow orchestration with LangGraph and the Claude Agent SDK, connecting agents to client tools and data through MCP, building RAG (Retrieval-Augmented Generation) pipelines, and automating data-driven decision-making processes. I am responsible for the entire lifecycle of these solutions — from designing data ingestion pipelines that transform raw client data into actionable insights, to building the backend APIs that serve these AI models, to provisioning the infrastructure with Terraform, Docker, and Kubernetes on GCP and AWS. This role bridges the gap between cutting-edge AI research and practical business automation, providing continuous optimization and integration support for diverse client systems. I also deliver day to day Web Solutions as applications with requirements on demand.",
+    tech: ["AI Agents", "LangGraph", "Claude Agent SDK", "MCP", "RAG Pipelines", "LLM Orchestration", "FastAPI", "Python", "Terraform", "Docker", "Kubernetes"]
   },
   {
     id: 3,

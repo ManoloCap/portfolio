@@ -12,7 +12,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [typedText, setTypedText] = useState('');
-  const roles = ["Senior Software Engineer.", "AI Systems Architect.", "Data Engineer."];
+  const roles = ["Senior Software Engineer.", "AI Platform Engineer.", "Backend & DevOps Engineer."];
   const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
@@ -158,7 +158,7 @@ function App() {
                   <span className="cursor">|</span>
                 </div>
                 <p className="hero-description">
-                  Senior Software Engineer with over 8 years of experience specializing in the intersection of High-Performance Backend Systems, Data Engineering, and Artificial Intelligence. Proven track record in architecting scalable APIs, real-time interactive experiences, and robust ETL pipelines for global brands and fintech institutions. Founder of Agente.tech, dedicated to orchestrating autonomous AI agents and computer vision solutions.
+                  Senior Software Engineer with 8+ years building production AI systems, high-performance Python backends, and the cloud infrastructure that runs them. At Agente.tech I design and ship custom AI agents end-to-end — LLM orchestration with LangGraph and the Claude Agent SDK, tool connectivity through MCP, RAG and data-ingestion pipelines, and the FastAPI backends serving the models — on infrastructure I provision with Terraform, Docker, and Kubernetes. Previously: cloud data platforms (Airflow, BigQuery, Druid) on GCP/AWS, secure fintech APIs, and real-time computer vision with TensorFlow and MediaPipe. Open to Japan, Europe, or US roles.
                 </p>
                 <div className="hero-btns">
                   <a href="#projects" className="btn btn-primary">Featured Work</a>
@@ -177,7 +177,8 @@ function App() {
           <div className="container">
             <div className="glass contact-card">
               <h2 className="section-title">Get in <span className="text-secondary">Touch</span></h2>
-              <p>Looking for a Senior Software Engineer & AI Systems Architect? Let's build something extraordinary.</p>
+              <p>Looking for a Senior Software Engineer in AI Platform, Backend, or Infrastructure? Let's build something extraordinary.</p>
+              <p className="contact-subtext">Remote from Guatemala · Open to relocation in Japan, Europe, and the US</p>
               <div className="contact-links">
                 <a href="mailto:me@manolocap.dev" className="contact-item">
                    <Mail className="contact-icon" />
@@ -198,7 +199,7 @@ function App() {
         <div className="container footer-content">
           <div className="footer-logo">
             <span className="logo-text">Manolocap<span className="logo-dot">.</span>dev</span>
-            <p>Guatemala (Remote)</p>
+            <p>Guatemala · Remote · Japan / Europe / US</p>
           </div>
           <div className="footer-links">
              <a href="https://github.com/Manolocap" target="_blank" className="social-icon"><Github size={24} /></a>
@@ -463,6 +464,13 @@ function App() {
           font-size: 1.25rem;
           color: var(--text-muted);
           margin-bottom: 2.5rem;
+        }
+
+        .contact-card p.contact-subtext {
+          font-size: 1rem;
+          margin-top: -1.5rem;
+          margin-bottom: 2.5rem;
+          opacity: 0.7;
         }
 
         .contact-links {

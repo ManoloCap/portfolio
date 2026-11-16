@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { ExternalLink, Github } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -15,6 +16,18 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    id: 0,
+    title: "Agente.tech — Production AI Agent Platform",
+    category: "Agente.tech (Founder)",
+    description: "Custom AI agents built end-to-end for real business objectives: LLM workflow orchestration with LangGraph and the Claude Agent SDK, tool and data connectivity through MCP, RAG pipelines over client ingestion, and the FastAPI backends that serve the models — deployed on infrastructure provisioned with Terraform, Docker, and Kubernetes on GCP and AWS. Owns the full lifecycle: problem framing, ingestion design, backend APIs, deployment, and production optimization.",
+    tags: ["AI Agents", "LangGraph", "Claude Agent SDK", "MCP", "RAG", "FastAPI", "Terraform", "Kubernetes", "GCP", "AWS"],
+    link: "https://agente.tech",
+    github: "#",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    folderName: "",
+    assets: []
+  },
   {
     id: 1,
     title: "AI-Driven Fitness Experience",
@@ -359,6 +372,32 @@ export const Projects: React.FC = () => {
                     </span>
                   ))}
                 </div>
+                {(project.link !== "#" || project.github !== "#") && (
+                  <div className="project-links">
+                    {project.link !== "#" && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link-btn"
+                      >
+                        <ExternalLink size={15} />
+                        <span>Live Project</span>
+                      </a>
+                    )}
+                    {project.github !== "#" && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link-btn"
+                      >
+                        <Github size={15} />
+                        <span>Source</span>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -527,6 +566,33 @@ export const Projects: React.FC = () => {
           border: 1px solid var(--glass-border);
           border-radius: 0.5rem;
           color: var(--text-muted);
+        }
+
+        .project-links {
+          display: flex;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+          margin-top: 1.25rem;
+        }
+
+        .project-link-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          border: 1px solid var(--primary);
+          color: var(--primary);
+          text-decoration: none;
+          transition: all 0.25s ease;
+        }
+
+        .project-link-btn:hover {
+          background: var(--primary);
+          color: #fff;
+          transform: translateY(-2px);
         }
       `}</style>
     </section>
