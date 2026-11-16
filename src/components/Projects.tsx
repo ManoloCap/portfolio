@@ -23,7 +23,7 @@ const projects: Project[] = [
     description: "Custom AI agents built end-to-end for real business objectives: LLM workflow orchestration with LangGraph and the Claude Agent SDK, tool and data connectivity through MCP, RAG pipelines over client ingestion, and the FastAPI backends that serve the models — deployed on infrastructure provisioned with Terraform, Docker, and Kubernetes on GCP and AWS. Owns the full lifecycle: problem framing, ingestion design, backend APIs, deployment, and production optimization.",
     tags: ["AI Agents", "LangGraph", "Claude Agent SDK", "MCP", "RAG", "FastAPI", "Terraform", "Kubernetes", "GCP", "AWS"],
     link: "https://agente.tech",
-    github: "https://github.com/Manolocap/agente-tech",
+    github: "#",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
     folderName: "",
     assets: []
